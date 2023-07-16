@@ -1,25 +1,50 @@
-// https://docs.codewars.com/gamification/ranks/#:~:text=Kyu%20(or%20Ky%C5%AB)%20indicates%20the,master%20level%2C%20we%20count%20upward.
-
 // URL
-//
+// https://www.codewars.com/kata/585d8c8a28bc7403ea0000c3/train/javascript
 
 // Input
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let inputs = [
-  { input: [""], expected_result: "" },
+    { input: [[ 'Aa', 'aaa', 'aaaaa', 'BbBb', 'Aaaa', 'AaAaAa', 'a' ]], expected_result: "BbBb" },
+    { input: [[ 'abc', 'acb', 'bac', 'foo', 'bca', 'cab', 'cba' ]], expected_result: "foo" },
+    { input: [[ 'silvia', 'vasili', 'victor' ]], expected_result: "victor" },
+    { input: [[ 'Tom Marvolo Riddle', 'I am Lord Voldemort', 'Harry Potter' ]], expected_result: "Harry Potter" },
+    { input: [[ '    ', 'a', ' ' ]], expected_result: "a" },
 ];
 
 
 // Functions
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function solution1(){
+function solution1(arr){
+    
+    let newArr = []
+    
+    for(let str of arr){
+      str = str.replace(" ", "").trim().split('');
+      let lol = new Set()
+
+      for(let s of str){
+        lol.add(s.toUpperCase())
+      }
+
+      newArr.push([...lol].sort().join(''))
+    }
+    let unique = newArr.filter(a => newArr.indexOf(a) === newArr.lastIndexOf(a))[0]
+    // console.log(arr)
+    let position = newArr.indexOf(unique)
+
+    return arr[position]
   
+}
+
+function solution2(arr){
+  return arr.sort().filter((e, i, a) => e.match(new RegExp(`[^${a[1]}]`, 'gi')))[0];
+
 }
 
 
 // test result
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-let tester = test([solution1], 1, inputs, 1);
+let tester = test([solution1,solution2], 2, inputs, 1);
 console.log(tester.actual_result);
 console.log(tester.expected_result);
 

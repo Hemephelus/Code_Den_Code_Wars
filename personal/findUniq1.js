@@ -1,27 +1,34 @@
-// https://docs.codewars.com/gamification/ranks/#:~:text=Kyu%20(or%20Ky%C5%AB)%20indicates%20the,master%20level%2C%20we%20count%20upward.
-
 // URL
-//
+// https://www.codewars.com/kata/585d7d5adb20cf33cb000235
 
 // Input
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let inputs = [
-  { input: [""], expected_result: "" },
+  { input: [[1, 1, 1, 2, 1, 1]], expected_result: 2 },
+  { input: [[0, 0, 0.55, 0, 0]], expected_result: 0.55 },
+  { input: [[1, 0, 0]], expected_result: 1 },
+  { input: [[0, 1, 0]], expected_result: 1 },
+  { input: [[0, 0, 1]], expected_result: 1 },
+  { input: [[1, 1, 2, 1, 1]], expected_result: 2 },
+  { input: [[3, 10, 3, 3, 3]], expected_result: 10 },
 ];
-
 
 // Functions
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function solution1(){
-  
+function solution1(arr) {
+    return arr.filter(a => arr.indexOf(a) === arr.lastIndexOf(a))[0]
 }
 
 
+function solution2(arr) {
+    arr.sort((a,b)=>a-b);
+  return arr[0]==arr[1]?arr.pop():arr[0]
+}
+
 // test result
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-let tester = test([solution1], 1, inputs, 1);
-console.log(tester.actual_result);
-console.log(tester.expected_result);
+let tester = test([solution1,solution2], 2, inputs, 7);
+console.log(tester);
 
 /**
  * Test Multiple solutions and input at the same time.

@@ -1,25 +1,37 @@
-// https://docs.codewars.com/gamification/ranks/#:~:text=Kyu%20(or%20Ky%C5%AB)%20indicates%20the,master%20level%2C%20we%20count%20upward.
-
 // URL
-//
+//  https://www.codewars.com/kata/5547cc7dcad755e480000004/train/javascript
 
 // Input
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let inputs = [
-  { input: [""], expected_result: "" },
+    { input: [26], expected_result: [[15,21], [21,15]] },
+    { input: [100], expected_result: [] },
 ];
 
 
 // Functions
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function solution1(){
-  
+function solution1(n){
+    let nums = []
+    let sum = (n*(n+1))/2
+    let a, b
+    for(let i = 0 ; i < n; i++){
+        b= i+1
+        let top = sum-b
+        let bottom = b+1
+        a = top/bottom
+        if(a<=n && top%bottom === 0){
+            nums.push([b,a])
+        }
+    }
+    return nums
+//   return a?[[a,b],[b,a]]:[]
 }
 
 
 // test result
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-let tester = test([solution1], 1, inputs, 1);
+let tester = test([solution1], 1, inputs, 2);
 console.log(tester.actual_result);
 console.log(tester.expected_result);
 

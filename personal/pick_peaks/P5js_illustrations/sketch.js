@@ -4,10 +4,10 @@ let h, w;
 // let pickPeaks = [0, 1, 2, 5, 1, 0];
 // let pickPeaks = [1, 2, 3, 6, 4, 1, 2, 3, 2, 1];
 // let pickPeaks = [3, 2, 3, 6, 4, 1, 2, 3, 2, 1, 2, 3,10,90];
-let pickPeaks = [0,1,10,100];
-// let pickPeaks = [1, 2, 2, 2, 1];
+// let pickPeaks = [0,1,10,100];
+// let pickPeaks = [1, 2, 2, 2, 2];
 // let pickPeaks = [];
-// let pickPeaks = [1,2,5,4,3,2,3,6,4,1,2,3,3,4,5,3,2,1,2,3,5,5,4,3];
+let pickPeaks = [1,2,5,4,3,2,3,6,4,1,2,3,3,4,5,3,2,1,2,3,5,5,4,3];
 let x, y;
 let grid = [];
 

@@ -1,7 +1,7 @@
 // https://docs.codewars.com/gamification/ranks/#:~:text=Kyu%20(or%20Ky%C5%AB)%20indicates%20the,master%20level%2C%20we%20count%20upward.
 
 // URL
-//
+// https://www.codewars.com/kata/5629db57620258aa9d000014/train/javascript
 
 // Input
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

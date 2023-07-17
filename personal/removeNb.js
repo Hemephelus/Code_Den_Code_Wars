@@ -25,7 +25,6 @@ function solution1(n){
         }
     }
     return nums
-//   return a?[[a,b],[b,a]]:[]
 }
 
 

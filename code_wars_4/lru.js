@@ -24,7 +24,7 @@ let inputs = [
         8, 7, 11, 1, 23, 24, 21, 14, 21, 14, 7, 19, 20,
       ],
     ],
-    expected_result: [23, 13, 17, 11, 20, 24, 21, 14, 19, 4, 12, 2, 8, 7, 1 ],
+    expected_result: [23, 13, 17, 11, 20, 24, 21, 14, 19, 4, 12, 2, 8, 7, 1],
   },
 ];
 
@@ -38,8 +38,8 @@ function solution1(n, referencesList) {
       if (!set.has(referencesList[i])) {
         let pos = arr.indexOf(-1);
         arr[pos] = referencesList[i];
-      }else{
-        set.delete(referencesList[i])
+      } else {
+        set.delete(referencesList[i]);
       }
     } else {
       if (!set.has(referencesList[i])) {
@@ -58,13 +58,50 @@ function solution1(n, referencesList) {
   return arr;
 }
 
-function solution2(n, referencesList){
-    
+function solution2(n, referencesList) {
+  const pageList = [],
+    usedPageTracker = [];
+
+  for (let page of referencesList) {
+    if (pageList.length < n) {
+      if (pageList.includes(page)) {
+      } else {
+        pageList.push(page);
+      }
+    } else {
+      if (pageList.includes(page)) {
+      } else {
+        let earliestPage = usedPageTracker[usedPageTracker.length - 1];
+        let index = pageList.indexOf(earliestPage);
+        console.log(usedPageTracker, earliestPage, index);
+        pageList.splice(index, 1, page);
+      }
+    }
+
+    const pageIndex = usedPageTracker.indexOf(page);
+
+    if (pageIndex !== -1) {
+      usedPageTracker.splice(pageIndex, 1);
+    }
+
+    usedPageTracker.unshift(page);
+
+    if (usedPageTracker.length > n) {
+      usedPageTracker.pop();
+    }
+    console.log(usedPageTracker);
+  }
+
+  while (pageList.length < n) {
+    pageList[pageList.length] = -1;
+  }
+
+  return pageList;
 }
 
 // test result
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-let tester = test([solution1], 1, inputs, 8);
+let tester = test([solution1,solution2], 2, inputs, 8);
 console.log(tester.actual_result);
 console.log(tester.expected_result);
 

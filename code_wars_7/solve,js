@@ -1,38 +1,19 @@
 // URL
-// https://www.codewars.com/kata/559536379512a64472000053/train/javascript
+// https://www.codewars.com/kata/5b7bd90ef643c4df7400015d/train/javascript
 
 // Input
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let inputs = [
-  { input: ["BORNY IN 2015!", 1], expected_result: "!4897 Oj oSpC" },
-  { input: ["I LOVE YOU!!!", 1], expected_result: "!!!vPz fWpM J" },
-  {
-    input: ["MY GRANMA CAME FROM NY ON THE 23RD OF APRIL 2015", 2, 1],
-    expected_result: "4897 NkTrC Hq fT67 GjV Pq aP OqTh gOcE CoPcTi aO",
-  },
+  { input: [""], expected_result: "" },
 ];
+
 
 // Functions
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function solution1(s, n) {
-  // console.log(s, n);
-  // console.log(30%26);
-  s = s.split('')
-  for (let i = 0; i < s.length; i++) {
-    charCode = s[i].charCodeAt(0);
-    if (charCode >= 65 && charCode <= 90) {
-      let str = String.fromCharCode((charCode+n-65)%26+65)
-      s[i] = i%2===0?str.toUpperCase():str.toLowerCase()
-    }
-
-    if(Number.isInteger(+s[i]) && s[i] !== " "){
-      s[i] = 9-s[i]
-    }
-    
-  }
-  console.log(s);
-    return s.reverse().join('')
+function solution1(){
+  
 }
+
 
 // test result
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

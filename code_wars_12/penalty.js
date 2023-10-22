@@ -5,9 +5,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let inputs = [
   {
-    input: [
-      ["45", "30", "50", "1", "45", "30", "50", "1", "45", "30", "50", "1"],
-    ],
+    input: [["45", "30", "50", "1"]],
     expected_result: 1304550,
   },
   { input: [["100", "10", "1"]], expected_result: 100101 },
@@ -15,97 +13,92 @@ let inputs = [
   { input: [["70", "46", "4", "19"]], expected_result: 1944670 },
   { input: [["71", "82", "42", "34", "90"]], expected_result: 3442718290 },
   { input: [["31", "97", "6", "78"]], expected_result: 3167897 },
+  { input: [["72", "7", "7", "78", "79", "709", "94"]],
+  expected_result: 7097277787994,
+},
+{ input: [[ '59', '37', '3' ]], expected_result: 33759 },
+{ input: [[  '30', '9',  '81', '78','63', '36', '38', '42','10','34', '40','8', '92']], expected_result: 0 },
+// { input: [[  '30', '9',  '81', '78','63', '36', '38', '42','10', '34', '40', '8','92', '42', '27' ]], expected_result: 0 },
 ];
 
 // Functions
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// function solution1(a_list) {
+function solution1(a_list) {
+   
+  let minPenalty = Infinity;
+  function findLeastPenalty(penalties, arr = [], memo = [], dept = 0) {
+    if (penalties.length === 0) return "";
 
-//   let minPenalty = Infinity
-//   function findLeastPenalty(penalties, arr= []){
+    penalties.sort((a, b) => +a - +b);
+    // penalties.sort((a, b) => +b - +a);
+    let memoValue = dept + arr.join("");
 
-//     if(penalties.length === 0) return ''
-
-//     for(let i = 0; i < penalties.length; i++){
-//       //
-//       let newPenalties = penalties.slice() // [3] => [3]
-//       let [removedPenalty] = newPenalties.splice(i,1) // [3], []
-//       arr.push(removedPenalty) // [1,2,3]
-//       // recursion
-//       findLeastPenalty(newPenalties,arr)
-//       // after
-//       if(a_list.length === arr.length){
-//         let finalValue = arr.join('')
-//         if(+finalValue <= minPenalty ){
-//           minPenalty = finalValue // 123
-//         }
-//       }
-//       arr.pop() //[1,2]
-//     }
-
-//     return minPenalty
-//   }
-
-//   return findLeastPenalty(a_list)
-// }
-
-function solution1(list) {
-  const mod = [];
-
-  const mod2 = [];
-
-  for (let i = 0; i < list.length; i++) {
-    let copy = [];
-
-    copy.push(list[i]);
-
-    for (let b = 0; b < list.length; b++) {
-      if (list[i] != list[b]) {
-        copy.push(list[b]);
-      }
+    if (arr.length !== 0) {
+      if (memo.indexOf(memoValue) !== -1) return "";
+      memo.push(memoValue);
+      if (stopSearch(memo, dept)) return "";
     }
 
-    mod.push(copy);
+    for (let i = 0; i < penalties.length; i++) {
+      //
 
-    copy = [];
+      let newPenalties = penalties.slice(); // [3] => [3]
+      let [removedPenalty] = newPenalties.splice(i, 1); // [3], []
+      arr.push(removedPenalty); // [1,2,3]
+
+      // recursion
+      findLeastPenalty(newPenalties, arr, memo, dept + 1);
+      // after
+      if (a_list.length === arr.length) {
+        let finalValue = arr.join("");
+        if (+finalValue <= minPenalty) {
+          console.log(finalValue);
+          minPenalty = finalValue; // 123
+        }
+      }
+      arr.pop();
+    }
+
+    return minPenalty;
   }
 
-  console.log("mod", mod);
+  return findLeastPenalty(a_list);
+}
 
-  for (let i = 0; i < mod.length; i++) {
-    let copy = [];
+function stopSearch(memo, dept) {
+  let l = memo.length;
+  if (l < 2 || dept < 2) return false;
 
-    copy.push(mod[i]);
-
-    for (let b = 0; b < mod.length; b++) {
-      if (mod[i] != mod[b]) {
-        copy.push(mod[b]);
-      }
-    }
-
-    let sort = [];
-
-    copy.forEach((itm) => {
-      sort.push(itm.join(""));
-    });
-
-    lesser = sort[0];
-
-    for (let i = 0; i < sort.length; i++) {
-      if (sort[i + 1] < lesser) {
-        lesser = sort[i + 1];
-      }
-    }
-
-    console.log("lesser", lesser);
+  let fMemo = memo.filter((m) => +m[0] === dept);
+  let fl = fMemo.length;
+  if (fl < 2) return false;
+  let first = fMemo[fl - 2].slice(1);
+  let second = fMemo[fl - 1].slice(1);
+  if (first <= second && (first.length === second.length)) {
+    let pos = memo.indexOf(fMemo[fl - 1]);
+    memo.splice(pos, 1);
+    return true;
   }
 
-  return lesser;
+  let pos = memo.indexOf(fMemo[fl - 2]);
+  memo.splice(pos, 1);
+  return false;
+}
+
+function solution2(a_list){
+  return a_list.sort(
+    (a, b) => {
+      console.log(a);
+      console.log(b);
+      console.log(a + b , b + a );
+      return a + b > b + a ? 9 : -9
+    }
+    )//.join('');
 }
 
 // test result
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-let tester = test([solution1], 1, inputs, 6);
+let tester = test([solution1, solution2], 2, inputs, 2);
 console.log(tester.actual_result);
 console.log(tester.expected_result);
 

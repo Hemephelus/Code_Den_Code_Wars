@@ -1,29 +1,28 @@
 // https://docs.codewars.com/gamification/ranks/#:~:text=Kyu%20(or%20Ky%C5%AB)%20indicates%20the,master%20level%2C%20we%20count%20upward.
 
 // URL
-// 
+// https://www.codewars.com/kata/513e08acc600c94f01000001/train/javascript
 
 // Input
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let inputs = [
-  { input: [""], expected_result: "" },
+  { input: [0, 0, 0], expected_result: "000000" },
+  { input: [0, 0, -20], expected_result: "000000" },
+  { input: [300, 255, 255], expected_result: "FFFFFF" },
+  { input: [173, 255, 47], expected_result: "ADFF2F" },
 ];
-
 
 // Functions
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function solution1(){
-  
+function solution1(r, g, b) {
+  return "FFFFFF";
 }
-
 
 // test result
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-let [tester, numberOfInputs] = test([solution1], 1, inputs, 1);
+let tester = test([solution1], 1, inputs, 1);
 console.log(tester.actual_result);
 console.log(tester.expected_result);
-
-console.log(numberOfInputs);
 
 /**
  * Test Multiple solutions and input at the same time.
@@ -44,10 +43,7 @@ function test(funcs, funcIndex = 1, inputs, inputsIndex = 1) {
     };
   }
 
-  return [
-    {
-      ...results[funcIndex],
-    },
-    inputs.length,
-  ];
+  return {
+    ...results[funcIndex],
+  };
 }

@@ -7,7 +7,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let inputs = [
   { input: [0, 0, 0], expected_result: "000000" },
-  { input: [0, 0, -20], expected_result: "000000" },
+  { input: [1, 2, 3], expected_result: "010203" },
+  { input: [255, -21, 255], expected_result: "FF00FF" },
   { input: [300, 255, 255], expected_result: "FFFFFF" },
   { input: [173, 255, 47], expected_result: "ADFF2F" },
 ];
@@ -15,7 +16,19 @@ let inputs = [
 // Functions
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function solution1(r, g, b) {
-  return "FFFFFF";
+  r = (r > 255 ? 255 : r < 0 ? 0 : r);
+  g = g > 255 ? 255 : g < 0 ? 0 : g;
+  b = b > 255 ? 255 : b < 0 ? 0 : b;
+
+  r = r.toString(16).toUpperCase();
+  g = g.toString(16).toUpperCase();
+  b = b.toString(16).toUpperCase();
+
+  r = r.length < 2 ? "0" + r : r;
+  g = g.length < 2 ? "0" + g : g;
+  b = b.length < 2 ? "0" + b : b;
+
+  return r + g + b;
 }
 
 // test result

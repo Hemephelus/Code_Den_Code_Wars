@@ -19,12 +19,26 @@ let inputs = [
 // Functions
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function solution1(arr) {
-    return arr
+    let zeroArr = []
+    let nonZeroArr = []
+
+    for(let elem of arr){
+      if(elem === 0){
+        zeroArr.push(elem)
+      }else{
+        nonZeroArr.push(elem)
+      }
+    }
+
+    
+
+    // return nonZeroArr.concat(zeroArr)
+    return arr.filter(a => a !== 0).concat(arr.filter(a => a === 0))
 }
 
 // test result
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-let tester = test([solution1], 1, inputs, 1);
+let tester = test([solution1], 1, inputs, 2);
 console.log(tester.actual_result);
 console.log(tester.expected_result);
 

@@ -37,16 +37,15 @@ function solution1(str) {
       // console.log(isLower('a'));
       if (isLower(letter)) {
         // transform the letter upper
-        let upperLetter = letter.toUpperCase()
+        let upperLetter = letter.toUpperCase();
         // lookup the upper case letter in our obj
         // transform our result back to lower case
-        out += key[upperLetter]?key[upperLetter].toLowerCase():letter
-      }else{
+        out += key[upperLetter] ? key[upperLetter].toLowerCase() : letter;
+      } else {
         // lookup the upper case letter in our obj
         // console.log(letter);
         // console.log(key[letter]);
-        out += key[letter]?key[letter]:letter
-
+        out += key[letter] ? key[letter] : letter;
       }
     }
     console.log(out);
@@ -61,16 +60,15 @@ function solution1(str) {
       // console.log(isLower('a'));
       if (isLower(letter)) {
         // transform the letter upper
-        let upperLetter = letter.toUpperCase()
+        let upperLetter = letter.toUpperCase();
         // lookup the upper case letter in our obj
         // transform our result back to lower case
-        out += key[upperLetter].toLowerCase()||letter
-      }else{
+        out += key[upperLetter].toLowerCase() || letter;
+      } else {
         // lookup the upper case letter in our obj
         // console.log(letter);
         // console.log(key[letter]);
-        out += key[letter]||letter
-
+        out += key[letter] || letter;
       }
     }
     console.log(out);
@@ -89,12 +87,39 @@ function solution1(str) {
 }
 
 function solution2(str) {
+  const rule = "GA-DE-RY-PO-LU-KI".split("-");
+  const code = [...rule, ...rule.map((x) => x.toLowerCase())];
+  console.log(code);
+  const swapToObj = (acc, curr) => {
+    return (acc[curr[0]] = curr[1]), (acc[curr[1]] = curr[0]), acc;
+  };
   
+  const cypher = (code) => (str) => str.replace(/./g, (x) => code[x] || x);
+  
+  const encode = cypher(code.reduce(swapToObj, {}));
+  console.log(encode('lol'));
+  const decode = encode;
+}
+
+function solution3(str) {
+  let abc = "GADERYPOLUKIgaderypoluki";
+  return str
+    .split("")
+    .map((v) => {
+      let x = abc.indexOf(v); // 0 or 1
+      return x === -1 ? v : x % 2 ? abc[x - 1] : abc[x + 1];
+    })
+    .join("");
 }
 
 // test result
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-let [tester, numberOfInputs] = test([solution1], 1, inputs, 1);
+let [tester, numberOfInputs] = test(
+  [solution1, solution2, solution3],
+  2,
+  inputs,
+  1
+);
 console.log(tester.actual_result);
 console.log(tester.expected_result);
 

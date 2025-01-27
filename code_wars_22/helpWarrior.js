@@ -24,9 +24,6 @@ function solution1(honorScore, targetHonorScore) {
   };
 }
 
-101 >> 10
-101 << 1010
-
 // test result
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let [tester, numberOfInputs] = test([solution1], 1, inputs, 1);
